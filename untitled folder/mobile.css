@@ -1,0 +1,202 @@
+/* ====== MOBILE FIXES (About + Life) ======
+   Подключай после основного CSS.
+   Ничего не ломает на десктопе.
+*/
+
+/* ---------- О НАС ---------- */
+@media (max-width: 960px){
+  /* на планшетах оставляем твой grid, уже 1 колонка */
+  .about { padding: 64px 16px; }
+  .about .wrap { gap: 22px; }
+}
+
+@media (max-width: 600px){
+  /* на телефонах делаем столбец и гарантируем читаемость текста */
+  .about { padding: 56px 16px; }
+
+  /* вместо grid используем колонку — так мы контролируем порядок */
+  .about .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .about .text{
+    max-width: none;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .about .text p,
+  .about .text li{
+    line-height: 1.6;
+  }
+
+  /* Фото не вываливается за края */
+  .photo{ width: 100%; }
+  .photo img{ width: 100%; height: auto; display: block; }
+
+  /* Порядок: текст выше, фото ниже (если нужно наоборот — поменяй 1/2 местами) */
+  .about .wrap > .text{ order: 1; }
+  .about .wrap > .photo-wrap{ order: 2; }
+}
+
+@media (max-width: 380px){
+  .about .subtitle{ font-size: clamp(20px, 7vw, 26px); }
+  .about .text p,
+  .about .text li{ font-size: 15px; }
+}
+
+/* ---------- ЖИЗНЬ В САДИКЕ ---------- */
+
+@media (max-width: 1024px){
+  .life{ padding: 80px 0; }
+}
+
+/* превращаем «горизонтальную ленту» в адаптивную сетку */
+@media (max-width: 900px){
+  .life-grid{
+    grid-auto-flow: row;
+    grid-auto-columns: initial;
+    grid-template-rows: initial;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 0 16px;
+  }
+  .life-grid .sq{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;   /* аккуратные квадраты на мобиле */
+    object-fit: cover;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 600px){
+  .life-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .life-title{ font-size: clamp(24px, 6vw, 32px); }
+  .life-quote{ margin: 0 16px 22px; }
+}
+
+@media (max-width: 360px){
+  .life-grid{
+    grid-template-columns: 1fr; /* совсем узкие — по одной карточке */
+    gap: 8px;
+  }
+}
+
+/* чуть уменьшаем декоративные волны/полусферы, чтобы не мешали контенту */
+@media (max-width: 600px){
+  .life-waves{ height: 110px; }
+  .semis .semi{ width: 150px; height: 75px; }
+  .semis .semi.second{ width: 180px; height: 90px; }
+}
+
+/* ---------- ЦЕНЫ (Prices) ---------- */
+/* планшеты: две колонки, помягче отступы */
+@media (max-width: 1050px){
+  .price-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+}
+
+/* телефоны: одна колонка, кнопка всегда влезает и растягивается */
+@media (max-width: 600px){
+  .prices { padding: 80px 0 100px; }
+  .price-panel { padding: 22px 16px 26px; }
+  .price-grid { grid-template-columns: 1fr; gap: 14px; }
+
+  .tariff{
+    min-height: unset;         /* растёт по контенту */
+    border-radius: 16px;
+  }
+  .tariff .head{
+    padding: 16px 12px;
+    font-size: 12px;
+    letter-spacing: .12em;
+  }
+  .tariff .body{
+    padding: 24px 18px 18px;
+    gap: 14px;
+
+    /* ключевой фикс для iPhone/Safari: растягиваем элементы grid */
+    grid-template-columns: 1fr;
+    justify-items: stretch;    /* вместо center */
+    align-items: start;
+  }
+
+  /* кнопка "Записаться" — занимает всю ширину колонки */
+  .btn-enroll{
+    justify-self: stretch;     /* растягивание в grid */
+    width: 100%;
+    max-width: 100%;
+    min-height: 48px;
+    padding: 0 18px;
+    font-size: 15px;
+    line-height: 1.15;
+    white-space: normal;       /* разрешаем перенос */
+    word-break: break-word;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /* Чуть компактнее типографика */
+  .price{ font-size: clamp(24px, 6vw, 32px); }
+  .period{ font-size: 12px; }
+  .desc{ font-size: 14px; }
+
+  /* не поднимаем карточку на мобиле */
+  .tariff--featured{ transform: none; }
+}
+
+@media (max-width: 360px){
+  .tariff .body{ padding: 20px 16px 16px; gap: 12px; }
+  .btn-enroll{
+    min-height: 44px;
+    font-size: 14px;
+    padding: 0 12px;
+  }
+}
+
+/* ---------- Якорь контактов (чтобы не приземлялось на карту) ---------- */
+/* Сработает, если в HTML у блока контактов есть id="contact-info" */
+#contact-info { scroll-margin-top: 90px; }
+
+/* ---------- ШАПКА: фикс наложения логотипа и иконки WhatsApp ---------- */
+/* делаем шапку компактнее и прячем WA-иконку на телефонах */
+.top-band .nav { gap: 10px; }
+
+@media (max-width: 960px){
+  .brand img.icon { width: 140px; height: 72px; object-fit: contain; }
+  .brand img.wordmark { height: 32px; width: auto; }
+}
+
+@media (max-width: 880px){
+  /* самый надёжный фикс: прячем WA-иконку сверху, оставляем её в мобильном меню */
+  .top-band .whatsapp-link { display: none !important; }
+
+  /* чуть сжимаем логотип */
+  .brand img.icon { width: 120px; height: 62px; }
+  .brand img.wordmark { height: 26px; }
+}
+
+@media (max-width: 360px){
+  .brand img.icon { width: 104px; height: 54px; }
+  .brand img.wordmark { height: 22px; }
+}
+/* --- WhatsApp: показать в шапке на мобилках и ужать отступы --- */
+@media (max-width: 880px){
+  .top-band .whatsapp-link { 
+    display: flex !important;      /* было none */
+  }
+  .top-band .nav { gap: 8px; }
+  .brand { min-width: 0; flex: 0 1 auto; }
+  .brand img.icon { width: 120px; height: 62px; object-fit: contain; }
+  .brand img.wordmark { height: 26px; width: auto; }
+}
+@media (max-width: 360px){
+  .brand img.icon { width: 104px; height: 54px; }
+  .brand img.wordmark { height: 22px; }
+}

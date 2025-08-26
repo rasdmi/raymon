@@ -1,0 +1,345 @@
+:root{
+  --beige:#e2d7ba;  /* верхняя крупная полоса */
+  --sand:#bab193;   /* нижняя тонкая полоса */
+  --brown:#917767;  /* фирменный тёплый */
+  --text:#777777;   /* ГЛОБАЛЬНЫЙ цвет текста */
+  --white:#ffffff;
+  --soft:#eff1f3;   /* фон блока Жизнь */
+}
+
+/* Сброс и базовые */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;color:var(--text);background:#fff}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+
+.container{max-width:1200px;margin-inline:auto;padding:0 20px}
+
+/* Верхняя полоса с НАВИГАЦИЕЙ */
+.top-band{background:var(--beige)}
+.top-band .nav{display:flex;align-items:center;gap:16px;min-height:96px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+/* Увеличили logo-no.png в 3 раза */
+.brand img.icon{width:164px;height:84px;object-fit:contain}
+/* Вместо текста — картинка lo.png */
+.brand img.wordmark{height:51px;width:auto}
+
+.spacer{flex:1}
+.nav-links{display:flex;align-items:center;gap:18px}
+.nav-links a{padding:10px 12px;border-radius:10px;font-weight:600;line-height:1}
+.nav-links a:hover{background:rgba(0,0,0,.05)}
+
+/* Бургер на мобиле */
+.burger{display:none;border:0;background:transparent;padding:10px;margin:-10px}
+.burger span{display:block;width:24px;height:2px;background:#3a3a3a;margin:5px 0}
+
+@media (max-width:880px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .brand img.wordmark{height:26px}
+}
+
+/* Нижняя полоса в 3 раза тоньше */
+.nav-band{background:var(--sand);height:18px;border-bottom:1px solid rgba(0,0,0,.06)}
+
+/* Мобильное меню */
+.mobile-menu{display:none;background:var(--beige);border-top:1px solid rgba(0,0,0,.06)}
+.mobile-menu.open{display:block}
+.mobile-menu .menu-inner{display:grid;gap:6px;padding:10px 20px}
+.mobile-menu a{padding:10px 14px;border-radius:12px;font-weight:600}
+.mobile-menu a:hover{background:rgba(0,0,0,.05)}
+
+/* HERO с видео-фоном на весь экран */
+.hero{position:relative;isolation:isolate;min-height:100svh}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hero::after{ /* затемнение */
+  content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.42));z-index:-1
+}
+.hero-inner{position:relative;display:grid;place-items:center;min-height:100svh;padding:80px 20px}
+
+.big-logo{max-width:min(640px,80vw);filter:drop-shadow(0 6px 20px rgba(0,0,0,.25))}
+
+/* Полосы/волны: нижняя — белая, над ней — серая полупрозрачная */
+.waves{position:absolute;left:0;right:0;bottom:-1px;height:200px;pointer-events:none}
+.waves svg{width:100%;height:100%;display:block}
+
+/* Секция "О нас" */
+section{scroll-margin-top:90px}
+.about{padding:72px 20px}
+.about .wrap{display:grid;grid-template-columns:520px 1fr;gap:40px;align-items:center}
+.about .title{font-weight:700;letter-spacing:.08em;color:#9c8f7f;text-transform:uppercase;margin:0 0 10px;font-size:clamp(16px,2.3vw,18px)}
+.about .subtitle{font-weight:800;color:#584b40;margin:0 0 22px;font-size:clamp(28px,4vw,42px)}
+
+.about .text{max-width:62ch;margin:0;text-align:left}
+.about .text p{font-family:Georgia, "Times New Roman", serif;color:var(--text);line-height:1.7;font-size:clamp(16px,2.2vw,19px);margin:0 0 16px}
+.about .text ul{list-style:none;padding:0;margin:10px 0 0}
+.about .text li{font-family:Georgia, "Times New Roman", serif;color:var(--text);line-height:1.7;font-size:clamp(16px,2.2vw,19px);padding-left:18px;position:relative;margin:6px 0}
+.about .text li::before{content:"–";position:absolute;left:0;top:0}
+
+.photo-wrap{position:relative}
+.photo{border-radius:16px;overflow:hidden}
+
+.dot{position:absolute;border-radius:999px;will-change:transform}
+.dot.r1{width:14px;height:14px;border:2px solid var(--brown);top:-10px;left:18px}
+.dot.r2{width:16px;height:16px;border:2px solid var(--brown);right:-10px;top:40%}
+.dot.r3{width:12px;height:12px;border:2px solid var(--brown);bottom:-12px;left:35%}
+.dot.f1{width:18px;height:18px;background:rgba(145,119,103,.12);top:14%;left:-12px}
+.dot.f2{width:22px;height:22px;background:rgba(145,119,103,.22);bottom:20%;right:-16px}
+.dot.f3{width:10px;height:10px;background:rgba(145,119,103,.32);top:55%;left:30%}
+
+@media (max-width:960px){
+  .about .wrap{grid-template-columns:1fr;gap:28px}
+  .photo{max-width:520px;margin-inline:auto}
+}
+
+/* Жизнь в садике */
+.life{position:relative;background:var(--soft);padding:100px 0;overflow:hidden}
+.life-inner{position:relative;z-index:2;text-align:center}
+.life-title{font-weight:200;font-size:clamp(28px,4vw,42px);color:var(--text);margin:0 0 10px}
+.life-quote{font-size:14px;color:var(--text);margin:0 0 28px}
+.life-quote .author{opacity:.85}
+
+/* Две строки по 300px */
+.life-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,300px);grid-auto-columns:300px;gap:16px;justify-content:center}
+.life-grid .sq{width:300px;height:300px;object-fit:cover;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+
+/* Белые волны внутри секции (поверх фона) */
+.life-waves{position:absolute;left:0;right:0;height:160px;pointer-events:none;z-index:1}
+.life-waves.top{top:0}
+.life-waves.bottom{bottom:0;transform:rotate(180deg)}
+
+/* Две полусферы в каждом углу (с лёгким смещением) */
+.semis{position:absolute;pointer-events:none;z-index:0}
+.semis.top-left{top:10px;left:10px}
+.semis.bottom-right{right:10px;bottom:10px;transform:rotate(180deg)}
+.semi{position:absolute;display:block;width:200px;height:100px;border:1px solid rgba(145,119,103,.25);border-bottom:none;border-radius:200px 200px 0 0;background:transparent}
+.semi.second{width:240px;height:120px;left:16px;top:12px;opacity:.25}
+
+/* НАША КОМАНДА — фон #917767, белый текст, волны сверху/снизу */
+.team{position:relative;background:var(--brown);color:#fff;overflow:hidden}
+.team::before,.team::after{content:"";position:absolute;left:0;right:0;height:160px;pointer-events:none;z-index:1;background-repeat:no-repeat;background-size:100% 100%}
+.team::before{top:0;transform:translateY(-100%);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C260,40 420,100 720,68 C1000,46 1200,96 1440,64 L1440,160 L0,160 Z' fill='%23ffffff'/%3E%3Cpath d='M0,110 C240,80 420,120 720,88 C980,68 1200,112 1440,80 L1440,160 L0,160 Z' fill='rgba(255,255,255,0.7)'/%3E%3C/svg%3E");}
+.team::after{bottom:0;transform:translateY(100%) rotate(180deg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C260,40 420,100 720,68 C1000,46 1200,96 1440,64 L1440,160 L0,160 Z' fill='%23ffffff'/%3E%3Cpath d='M0,110 C240,80 420,120 720,88 C980,68 1200,112 1440,80 L1440,160 L0,160 Z' fill='rgba(255,255,255,0.7)'/%3E%3C/svg%3E");}
+.team-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:100px 20px;text-align:center}
+.team .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.95;margin:0 0 8px}
+.team .headline{font-weight:800;font-size:clamp(28px,4vw,44px);line-height:1.1;margin:0 0 14px}
+.team .sub{font-size:14px;opacity:.95;max-width:75ch;margin:0 auto 36px}
+/* Модалка */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal-card {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 480px;
+  width: 90%;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  text-align: center;
+}
+.modal-card h3 {
+  margin-top: 0;
+  font-weight: 800;
+}
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Сетка 2 строки по 4 кружка */
+.team-list{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 20px;justify-items:center}
+@media (max-width:960px){.team-list{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.team-list{grid-template-columns:1fr}}
+.member{display:flex;flex-direction:column;align-items:center}
+/* Аватар (прямоугольник со скруглением) */
+.avatar{position:relative;width:200px;height:260px;border-radius:16px;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:16px;display:block}
+/* Полусферы на тёмном фоне */
+.team .semis{position:absolute;pointer-events:none;z-index:0}
+.team .semis.top-left{top:10px;left:10px}
+.team .semis.bottom-right{right:10px;bottom:10px;transform:rotate(180deg)}
+.team .semi{position:absolute;display:block;width:200px;height:100px;border:1px solid rgba(255,255,255,.28);border-bottom:none;border-radius:200px 200px 0 0;background:transparent}
+.team .semi.second{width:240px;height:120px;left:16px;top:12px;opacity:.35}
+
+/* === ДОПОЛНИТЕЛЬНЫЕ ЗАНЯТИЯ И МЕРОПРИЯТИЯ ======================= */
+.extras{background:#f0f1f3;padding:90px 0}
+.extras .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin:0 0 8px;text-align:center}
+.extras .headline{font-weight:800;font-size:clamp(28px,4vw,44px);line-height:1.1;margin:0 0 10px;text-align:center;color:#232529}
+.extras .sub{font-size:14px;opacity:.9;max-width:75ch;margin:0 auto 36px;text-align:center}
+
+.extras-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media (max-width:900px){ .extras-grid{grid-template-columns:1fr} }
+
+.extra-card{position:relative;border-radius:16px;overflow:hidden;background:#ddd;aspect-ratio:3/4;box-shadow:0 6px 24px rgba(0,0,0,.08);cursor:pointer;transform:translateZ(0)}
+.extra-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease, filter .6s ease, opacity .6s ease}
+.extra-title{position:absolute;left:18px;right:18px;bottom:18px;color:#fff;font-weight:800;font-size:clamp(18px,2vw,28px);text-shadow:0 2px 10px rgba(0,0,0,.35);line-height:1.15}
+.extra-reveal{position:absolute;inset:0;background:#cbc7c1;color:#232529;padding:18px;overflow:auto;transform:rotateY(-180deg);backface-visibility:hidden;transition:transform .6s ease, opacity .6s ease;opacity:0}
+.extra-reveal h3{margin:0 0 10px;font-size:18px;font-weight:800}
+.extra-reveal p{margin:0 0 10px;font-size:14px;line-height:1.6}
+.extra-reveal ul{margin:6px 0 12px 18px}
+.extra-reveal li{margin:3px 0;font-size:14px;line-height:1.5}
+
+.extra-card:hover .extra-bg,
+.extra-card.open .extra-bg{transform:scale(1.04);filter:grayscale(.1) contrast(.96)}
+.extra-card:hover .extra-reveal,
+.extra-card.open .extra-reveal{transform:rotateY(0);opacity:1}
+.extra-card:hover .extra-title,
+.extra-card.open .extra-title{opacity:0}
+
+/* === КОНТАКТЫ ==================================================== */
+.contacts{background:#232529;color:#fff;padding:90px 0}
+.contacts .container{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start}
+@media (max-width:980px){ .contacts .container{grid-template-columns:1fr;gap:18px} }
+
+.map-wrap{border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.24);min-height:420px;background:#111}
+.map-wrap iframe{width:100%;height:100%;border:0;display:block;min-height:420px}
+
+.contacts h2{font-weight:800;font-size:clamp(28px,4vw,42px);line-height:1.1;margin:6px 0 12px}
+.small{opacity:.85;font-size:12px}
+.info-list{display:grid;gap:14px}
+.info-item{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+.info-item svg{width:20px;height:20px;margin-top:3px;opacity:.9;flex:0 0 auto}
+.info-item a{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.35)}
+.info-item a:hover{ text-decoration-color:#fff }
+
+.footer-line{opacity:.65;font-size:12px;margin-top:22px;border-top:1px solid rgba(255,255,255,.18);padding-top:14px}
+
+/* === ЦЕНЫ — визуал как на макете ================================ */
+.prices{background:#fff;padding:110px 0 140px}
+.prices h2{font-weight:800;font-size:clamp(34px,5vw,56px);text-align:center;margin:0 0 10px}
+.prices .note{max-width:80ch;margin:0 auto 44px;text-align:center;opacity:.8}
+
+/* белая «панель» с большим мягким свечением вокруг всех карточек */
+.price-panel{
+  max-width:1240px;margin:0 auto;
+  border-radius:24px;background:#fff;
+  padding:36px 26px 40px;
+  box-shadow:
+    0 40px 90px rgba(0,0,0,.08),
+    0 4px 20px rgba(0,0,0,.05);
+}
+
+/* сетка карточек */
+.price-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+}
+@media (max-width:1050px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.price-grid{grid-template-columns:1fr}}
+
+.tariff{
+  background:#fff;border-radius:20px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  display:flex;flex-direction:column;min-height:520px;
+}
+
+/* верхняя плашка */
+.tariff .head{
+  background:#eef0f3;color:#9aa0a6;
+  text-transform:uppercase;letter-spacing:.18em;
+  font-weight:700;text-align:center;
+  padding:24px 16px;font-size:14px;
+}
+
+/* контент */
+.tariff .body{padding:36px 28px 28px;display:grid;gap:18px;justify-items:center;text-align:center;flex:1}
+.price{font-weight:800;font-size:clamp(28px,3.6vw,40px);color:#111}
+.period{font-weight:800;text-transform:uppercase;letter-spacing:.12em;opacity:.7}
+.desc{opacity:.8}
+
+.btn-enroll{
+  margin-top:auto; text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:56px;padding:0 26px;border-radius:12px;border:0;
+  background:#232529;color:#fff;font-weight:800;cursor:pointer;
+}
+.btn-enroll:hover{filter:brightness(1.05)}
+
+/* выделенный тариф: поднят, коричневая плашка и кнопка */
+.tariff--featured{transform:translateY(-18px);box-shadow:0 18px 50px rgba(0,0,0,.12)}
+.tariff--featured .head{background:var(--brown);color:#fff}
+.tariff--featured .btn-enroll{background:var(--brown)}
+
+/* ===== ПУЗЫРЬКИ / ДЕКОР В РАЗДЕЛАХ ===== */
+.has-bubbles { position: relative; overflow: hidden; }
+.has-bubbles > * { position: relative; z-index: 2; } /* контент поверх пузырьков */
+.bubbles {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 0; /* ниже контента, выше фона */
+}
+.bubble {
+  position: absolute; border-radius: 999px; will-change: transform;
+  animation-name: bubble-bob; animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  /* параметры будут задаваться через CSS-переменные */
+  animation-duration: var(--dur, 12s);
+  animation-delay: var(--delay, 0s);
+  transform: translate(0, calc(var(--amp, 12px) * -1));
+}
+/* «кольцо» */
+.bubble.ring { background: transparent; border: 2px solid rgba(145,119,103,.35); }
+/* «мягкая точка» */
+.bubble.soft { background: rgba(145,119,103,.14); border: 0; }
+
+@keyframes bubble-bob {
+  0%   { transform: translate(0, calc(var(--amp) * -1)); }
+  50%  { transform: translate(var(--shift, 8px), var(--amp)); }
+  100% { transform: translate(0, calc(var(--amp) * -1)); }
+}
+
+/* Плавный скролл */
+html { scroll-behavior: smooth; }
+
+/* Универсальные волны для любых секций */
+.wavy { position: relative; overflow: hidden; }
+.wavy::before,
+.wavy::after{
+  content:""; position:absolute; left:0; right:0; height:160px;
+  background-repeat:no-repeat; background-size:100% 100%; pointer-events:none;
+}
+.wave-top::before{
+  top:0; transform:translateY(-100%);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C260,40 420,100 720,68 C1000,46 1200,96 1440,64 L1440,160 L0,160 Z' fill='%23ffffff'/%3E%3Cpath d='M0,110 C240,80 420,120 720,88 C980,68 1200,112 1440,80 L1440,160 L0,160 Z' fill='rgba(255,255,255,0.7)'/%3E%3C/svg%3E");
+}
+.wave-bottom::after{
+  bottom:0; transform:translateY(100%) rotate(180deg);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C260,40 420,100 720,68 C1000,46 1200,96 1440,64 L1440,160 L0,160 Z' fill='%23ffffff'/%3E%3Cpath d='M0,110 C240,80 420,120 720,88 C980,68 1200,112 1440,80 L1440,160 L0,160 Z' fill='rgba(255,255,255,0.7)'/%3E%3C/svg%3E");
+}
+
+/* Адаптация для предпочтения уменьшенного движения */
+@media (prefers-reduced-motion: reduce) {
+  .bubble { animation: none; }
+  .extra-bg, .extra-reveal { transition: none; }
+}
+.whatsapp-link .icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+/* === WhatsApp button === */
+.whatsapp-link{
+  display:flex; align-items:center; justify-content:center;
+  width:40px; height:40px; border-radius:8px;
+  flex:0 0 auto;
+}
+.whatsapp-link .icon{
+  width:22px; height:22px; display:block;
+}
+
+/* внутри мобильного меню — делаем кнопку пошире и дружелюбней для тача */
+.mobile-menu .whatsapp-link{
+  width:48px; height:48px; border-radius:10px;
+}
